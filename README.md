@@ -1,2 +1,5 @@
-# mlexp
-A package for the code that runs my machine learning analysis experiments
+# Machine Learning Experiment (MLEXP) Package
+
+A package of code that I use to run machine learning analysis experiments.
+
+TODO:  Fill this in with usage info
