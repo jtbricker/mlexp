@@ -8,3 +8,4 @@ def mirror(name):
     """
 
     print(name[::-1])
+    
