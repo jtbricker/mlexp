@@ -1,9 +1,9 @@
-dist: trusty
+dist: xenial
 language: python
 python: 3.7.2
 install:
-  - pip install -r requirements_dev.txt
-  - pip install -e .
+  - pip3 install -r requirements_dev.txt
+  - pip3 install -e .
 script:
   - pytest --cov=mlexp
 after_success:
