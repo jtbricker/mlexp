@@ -1,5 +1,6 @@
 """Tests for `nbutils` package."""
 import pytest
+from mock import patch
 
 import pandas as pd
 
@@ -29,3 +30,10 @@ def test_reassign_classes_three_groups_into_two():
 
     assert new_data['class'].value_counts()[0] == data['class'].value_counts()[0]
     assert new_data['class'].value_counts()[1] == data['class'].value_counts()[1] + data['class'].value_counts()[2]
+
+def test_group_classes_calls_reassign_classes():
+    with patch('mlexp.nbutils.reassign_classes') as reassign_classes_call:
+        data = pd.DataFrame([{'class':0,'data':100},{'class':1,'data':200}])
+        groups = {0:0, 1:1}
+        nbutils.group_classes(data, groups)
+        reassign_classes_call.assert_called_once_with(data, groups, "GroupID")
