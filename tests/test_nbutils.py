@@ -37,3 +37,57 @@ def test_group_classes_calls_reassign_classes():
         groups = {0:0, 1:1}
         nbutils.group_classes(data, groups)
         reassign_classes_call.assert_called_once_with(data, groups, "GroupID")
+
+def test_specificty_all_correct_one():
+    """If all predictions are correct, return 1.0"""
+    true = [1,0,1,0,1] 
+    pred = true
+
+    spec = nbutils.specificity(true, pred)
+
+    assert 1.0 == spec
+
+def test_specificty_all_incorrect_zero():
+    """If all predictions are incorrect, return 0.0"""
+    true = [1,0,1,0,1] 
+    pred = [0,1,0,1,0]
+
+    spec = nbutils.specificity(true, pred)
+
+    assert 0.0 == spec
+
+def test_specificty_correctly_calculates():
+    """Calculates specificity correctly"""
+    true = [0,0,0,0,0,0,0,0,0,0] 
+    pred = [0,0,0,0,1,1,1,1,1,1]
+
+    spec = nbutils.specificity(true, pred)
+
+    assert 0.4 == spec
+
+def test_negative_predictive_value_all_correct_one():
+    """If all predictions are correct, return 1.0"""
+    true = [1,0,1,0,1] 
+    pred = true
+
+    npv = nbutils.negative_predictive_value(true, pred)
+
+    assert 1.0 == npv
+
+def test_negative_predictive_value_all_incorrect_zero():
+    """If all predictions are incorrect, return 0.0"""
+    true = [1,0,1,0,1] 
+    pred = [0,1,0,1,0]
+
+    npv = nbutils.negative_predictive_value(true, pred)
+
+    assert 0.0 == npv
+
+def test_negative_predictive_value_correctly_calculates():
+    """Calculates npv correctly"""
+    true = [0,0,0,0,1,1,1,1,1,1]
+    pred = [0,0,0,0,0,0,0,0,0,0] 
+
+    npv = nbutils.negative_predictive_value(true, pred)
+
+    assert 0.4 == npv
