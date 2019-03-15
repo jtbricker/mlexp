@@ -103,3 +103,51 @@ def test_get_weighted_confusion_matrix_correct():
     assert tn == pytest.approx(0.9636, 0.1)
     assert fp == pytest.approx(0.0364, 0.1)
     assert fn == pytest.approx(0.07534, 0.1)
+
+def test_weighted_accuracy_correct():
+    """Calculates weighted accuracy correctly"""
+    true, pred = get_sample_data(135,53,2,11)
+
+    w_acc = nbutils.weighted_accuracy(true, pred)
+
+    assert w_acc == pytest.approx(0.94414, 0.1)
+
+def test_weighted_sensitivity_correct():
+    """Calculates weighted sensitivity correctly"""
+    true, pred = get_sample_data(135,53,2,11)
+
+    w_acc = nbutils.weighted_sensitivity(true, pred)
+
+    assert w_acc == pytest.approx(0.924657, 0.1)
+
+def test_weighted_specificity_correct():
+    """Calculates weighted specificity correctly"""
+    true, pred = get_sample_data(135,53,2,11)
+
+    w_acc = nbutils.weighted_specificity(true, pred)
+
+    assert w_acc == pytest.approx(0.924657, 0.1)
+
+def test_weighted_specificity_correct():
+    """Calculates weighted specificity correctly"""
+    true, pred = get_sample_data(135,53,2,11)
+
+    w_acc = nbutils.weighted_specificity(true, pred)
+
+    assert w_acc == pytest.approx(0.924657, 0.1)
+
+def test_weighted_ppv_correct():
+    """Calculates weighted postiive predictive value correctly"""
+    true, pred = get_sample_data(135,53,2,11)
+
+    w_acc = nbutils.weighted_ppv(true, pred)
+
+    assert w_acc == pytest.approx(0.924657, 0.1)
+
+def test_weighted_npv_correct():
+    """Calculates weighted negative predictive value correctly"""
+    true, pred = get_sample_data(135,53,2,11)
+
+    w_acc = nbutils.weighted_npv(true, pred)
+
+    assert w_acc == pytest.approx(0.924657, 0.1)
