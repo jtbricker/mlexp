@@ -80,3 +80,78 @@ def get_weighted_confusion_matrix(y_true, y_pred):
     tn_weighted = tn / (tn + fp)
     
     return tp_weighted, fp_weighted, fn_weighted, tn_weighted
+
+def weighted_accuracy(y_true, y_pred):
+    """ Calculates the weighted accuracy of the predictions
+    
+    Arguments:
+        y_true {array-like} -- true classes
+        y_pred {array-like} -- predicted classes
+    
+    Returns:
+        float -- weighted_accuracy
+    """
+
+    tpw, fpw, fnw, tnw = get_weighted_confusion_matrix(y_true, y_pred)
+    
+    return (tpw + tnw) / (tpw + fpw + fnw + tnw)
+    
+def weighted_sensitivity(y_true, y_pred):
+    """ Calculates the weighted sensitivity (aka True Postiive Rate, Recall) of the predictions
+    
+    Arguments:
+        y_true {array-like} -- true classes
+        y_pred {array-like} -- predicted classes
+    
+    Returns:
+        float -- weighted_sensitivity
+    """
+
+    tpw, _, fnw, _ = get_weighted_confusion_matrix(y_true, y_pred)
+
+    return tpw / (tpw + fnw)
+    
+def weighted_specificity(y_true, y_pred):
+    """ Calculates the weighted specificity (aka Selectivity, True Negative Rate) of the predictions
+    
+    Arguments:
+        y_true {array-like} -- true classes
+        y_pred {array-like} -- predicted classes
+    
+    Returns:
+        float -- weighted_specificity
+    """
+
+    _, fpw, _, tnw = get_weighted_confusion_matrix(y_true, y_pred)
+
+    return tnw / (tnw + fpw)
+    
+def weighted_ppv(y_true, y_pred):
+    """ Calculates the weighted positive predictive value (aka Precision) of the predictions
+    
+    Arguments:
+        y_true {array-like} -- true classes
+        y_pred {array-like} -- predicted classes
+    
+    Returns:
+        float -- weighted_ppv
+    """
+
+    tpw, fpw, _, _ = get_weighted_confusion_matrix(y_true, y_pred)
+    
+    return tpw / (tpw + fpw)
+
+def weighted_npv(y_true, y_pred):
+    """ Calculates the weighted negative predictive value of the predictions
+    
+    Arguments:
+        y_true {array-like} -- true classes
+        y_pred {array-like} -- predicted classes
+    
+    Returns:
+        float -- weighted_npv
+    """
+
+    _, _, fnw, tnw = get_weighted_confusion_matrix(y_true, y_pred)
+    
+    return tnw / (tnw + fnw)
