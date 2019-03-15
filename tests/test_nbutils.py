@@ -5,6 +5,7 @@ from mock import patch
 import pandas as pd
 
 from mlexp import nbutils
+from helpers import get_sample_data
 
 def test_reassign_classes_keep_all_data_but_reassign():
     """Return all data but reassign the labels"""
@@ -91,3 +92,14 @@ def test_negative_predictive_value_correctly_calculates():
     npv = nbutils.negative_predictive_value(true, pred)
 
     assert 0.4 == npv
+
+def test_get_weighted_confusion_matrix_correct():
+    """Calculates weighted confusion matrix correctly"""
+    true, pred = get_sample_data(135,53,2,11)
+
+    tp, fp, fn, tn = nbutils.get_weighted_confusion_matrix(true, pred)
+
+    assert tp == pytest.approx(0.9247, 0.1)
+    assert tn == pytest.approx(0.9636, 0.1)
+    assert fp == pytest.approx(0.0364, 0.1)
+    assert fn == pytest.approx(0.07534, 0.1)
