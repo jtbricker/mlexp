@@ -187,7 +187,7 @@ def test_plot_roc_verbose_true_prints_extra_data(capsys):
     y = [1,1,0]
     model = DummyClassifier(strategy="constant", constant=1).fit(X,y)
 
-    nbutils.plot_roc(model, X, y, verbose=True)
+    nbutils.plot_roc(model, X, y, verbose=True, show_plot=False)
 
     captured = capsys.readouterr()
     assert "CLASSIFICATION" in captured.out 
@@ -200,7 +200,7 @@ def test_plot_coefficients_no_errors():
     y = [1,1,0]
     model = LogisticRegression().fit(X,y)
 
-    nbutils.plot_coefficients(model, ['first','second'], 1)
+    nbutils.plot_coefficients(model, ['first','second'], 1, show_plot=False)
 
 def test_print_feature_importance_different_length_inputs_assertion_error():
     names = ["one", "two", "three"]
@@ -219,7 +219,7 @@ def test_plot_confusion_matrix_no_errors():
     """ Shows plot without error """
     confusion_matrix = np.array([[10,1],[3,17]])
 
-    nbutils.plot_confusion_matrix(confusion_matrix)
+    nbutils.plot_confusion_matrix(confusion_matrix, show_plot=False)
 
 def test_grid_search_optimization_no_errors():
     """ Runs optimization without error """
