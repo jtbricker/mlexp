@@ -3,11 +3,16 @@ The :mod:`mlexp.nbutils` module implements severals methods that are used for ma
 learning experiments in jupyter notebooks.
 """
 import itertools
-
+import os
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, confusion_matrix, make_scorer, roc_curve, classification_report
-import numpy as np 
+import numpy as np
+import matplotlib as mpl
+
+if os.environ.get('DISPLAY','') == '':
+    print('no display found. Using non-interactive Agg backend')
+    mpl.use('Agg')
 
 def group_classes(data, grouping):
     """ Wrapper for backwards compatibility. See :func:`<nbutils.reassign_classes>`"""
