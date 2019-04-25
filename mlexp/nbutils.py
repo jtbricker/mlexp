@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import accuracy_score, confusion_matrix, make_scorer, roc_curve, classification_report
 import numpy as np
+import os
+import matplotlib as mpl
 
 def group_classes(data, grouping):
     """ Wrapper for backwards compatibility. See :func:`<nbutils.reassign_classes>`"""
@@ -205,7 +207,7 @@ def plot_roc(model, X_test, Y_test, verbose=False, show_plot=True):
     Keyword Arguments:
         verbose {bool} -- [If true, diplays optional classification information and raw data] (default: {False})
     """
-
+    mpl.use('Agg')
     y_true, y_pred = Y_test, model.predict(X_test)
     if verbose:
         print("CLASSIFICATION REPORT")
@@ -243,7 +245,7 @@ def plot_coefficients(classifier, feature_names, top_features=20, show_plot=True
     Keyword Arguments:
         top_features {int} -- The number of features to display on chart (default: {20})
     """
-
+    mpl.use('Agg')
     coef = classifier.coef_.ravel()
     top_positive_coefficients = np.argsort(coef)[-top_features:]
     top_negative_coefficients = np.argsort(coef)[:top_features]
@@ -282,7 +284,7 @@ def plot_confusion_matrix(cm, classes=[0,1], normalize=False, title='Confusion m
         title {str} -- plot title (default: {'Confusion matrix'})
         print_matrix {bool} -- should the raw confusion matrix be printed (default: {False})
     """
-
+    mpl.use('Agg')
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
         print("Normalized confusion matrix")
