@@ -9,7 +9,6 @@ from sklearn.datasets import make_classification
 from imblearn.pipeline import Pipeline
 from sklearn.metrics import make_scorer, accuracy_score
 from sklearn.linear_model import LogisticRegression
-import matplotlib.pyplot as plt
 
 from mlexp import nbutils
 from helpers import get_sample_data
