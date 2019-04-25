@@ -9,7 +9,6 @@ from sklearn.datasets import make_classification
 from imblearn.pipeline import Pipeline
 from sklearn.metrics import make_scorer, accuracy_score
 from sklearn.linear_model import LogisticRegression
-import matplotlib.pyplot as plt
 
 from mlexp import nbutils
 from helpers import get_sample_data
@@ -187,7 +186,7 @@ def test_plot_roc_verbose_true_prints_extra_data(capsys):
     y = [1,1,0]
     model = DummyClassifier(strategy="constant", constant=1).fit(X,y)
 
-    nbutils.plot_roc(model, X, y, verbose=True, show_plot=False)
+    nbutils.plot_roc(model, X, y, verbose=True, show_plot=True)
 
     captured = capsys.readouterr()
     assert "CLASSIFICATION" in captured.out 
@@ -200,7 +199,7 @@ def test_plot_coefficients_no_errors():
     y = [1,1,0]
     model = LogisticRegression().fit(X,y)
 
-    nbutils.plot_coefficients(model, ['first','second'], 1, show_plot=False)
+    nbutils.plot_coefficients(model, ['first','second'], 1, show_plot=True)
 
 def test_print_feature_importance_different_length_inputs_assertion_error():
     names = ["one", "two", "three"]
@@ -219,7 +218,7 @@ def test_plot_confusion_matrix_no_errors():
     """ Shows plot without error """
     confusion_matrix = np.array([[10,1],[3,17]])
 
-    nbutils.plot_confusion_matrix(confusion_matrix, show_plot=False)
+    nbutils.plot_confusion_matrix(confusion_matrix, show_plot=True, print_matrix=True)
 
 def test_grid_search_optimization_no_errors():
     """ Runs optimization without error """
@@ -227,4 +226,4 @@ def test_grid_search_optimization_no_errors():
     clf = Pipeline([('classifier', LogisticRegression())])
     X, y  = make_classification()
 
-    nbutils.grid_search_optimization(clf, param_grid, X, y, X, y, cv=2, n_jobs=1)
+    nbutils.grid_search_optimization(clf, param_grid, X, y, X, y, cv=2, n_jobs=1, verbose=True)
