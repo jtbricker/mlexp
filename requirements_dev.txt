@@ -4,7 +4,7 @@ twine==1.13.0
 black==19.3b0
 pytest==4.6.3
 pytest-cov==2.7.1
-coveralls==1.8.1
+coveralls==1.11.0
 pandas==0.24.2
 scikit-learn==0.21.2
 numpy==1.16.4
